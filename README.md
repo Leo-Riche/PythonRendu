@@ -11,5 +11,5 @@ Lancer le script présent dans app.py
 
 PHASE 1 : 
 Récupération de l'url de la page d'un livre sur la page d'accueil
-Une fois la l'url dédiée, je récupère toutes les informations nécessaires sur le livre
-J'ajoute toutes les informations dans un fichier csv : book.csv
+Une fois l'url dédiée, je récupère toutes les informations nécessaires sur le livre
+J'ajoute toutes les informations dans un fichier csv : book_data.csv

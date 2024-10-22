@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
-import os
 
 url = "https://books.toscrape.com/"
 response = requests.get(url)
@@ -22,7 +21,7 @@ book_price_including_taxe = book_infos[3].text.replace('Â', '')
 book_price_excluding_taxe = book_infos[2].text.replace('Â', '')
 book_number_available = book_infos[5].text
 book_description = soup.select("article > p")[0].text
-book_category = soup.select("ul > li")[2].text
+book_category = soup.select("ul > li")[2].text.strip()
 book_review_rating = soup.find_all("p", class_="star-rating")[0]['class'][1]
 book_img_url = "books.toscrape.com" + soup.select("img")[0]["src"].replace('../..', '')
 
