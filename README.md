@@ -30,3 +30,7 @@ J'ajoute toutes les informations dans un fichier csv avec le nom de la catégori
 Puis, je récupère des url des images de chaque livre de chaque catégorie.
 Une fois les url récupérées, je crée les images
 J'ajoute les images dans le dossier "images"
+
+PHASE 5 :
+Récupération des données des csv
+Appel des fonctions permettant de créer les graphiques avec les données récupérées précédemmment
