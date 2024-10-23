@@ -19,3 +19,8 @@ PHASE 2 :
 Récupération de l'url d'une catégorie de livre sur la page d'accueil
 Une fois l'url dédiée, je récupère tous les livres et toutes leurs informations.
 J'ajoute toutes les informations dans un fichier csv : book_data.csv
+
+PHASE 3 :
+Récupération des url des images de chaque livre
+Une fois les url récupérés, création des images
+Ajout des images dans le dossier "images"

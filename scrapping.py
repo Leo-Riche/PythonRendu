@@ -2,10 +2,27 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import csv
+import os
 
 url = "https://books.toscrape.com/"
 response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
+
+if not os.path.exists('images'):
+    os.makedirs('images')
+else:
+    for filename in os.listdir('images'):
+        file_path = os.path.join('images', filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
+
+if not os.path.exists('csv'):
+    os.makedirs('csv') 
 
 def getBook(soup, url):
     book_infos = soup.select("td")
@@ -47,7 +64,16 @@ def getAllBooksOfCategory(soup, url, category_number):
                 soup = BeautifulSoup(response.content, 'html.parser')
             else:
                 break
-
+            
+        for book in book_data:
+            book_img_url = book[9]
+            img_response = requests.get('http://' + book_img_url)
+            if img_response.status_code == 200:
+                img_name = re.sub(r'[^\w\s-]', '', book[2]) + '.jpg'
+                img_name = img_name.replace(' ', '_')
+                with open(f'images/{img_name}', 'wb') as img_file:
+                    img_file.write(img_response.content)
+                    
     except Exception as e:
         print(f"La catégorie {category_number} n'existe pas ou une erreur s'est produite: {e}")
 
@@ -56,4 +82,4 @@ def getAllBooksOfCategory(soup, url, category_number):
         writer.writerow(['URL', 'UPC', 'Title', 'Price (incl. tax)', 'Price (excl. tax)', 'Availability', 'Description', 'Category', 'Review Rating', 'Image URL'])
         writer.writerows(book_data)
         
-getAllBooksOfCategory(soup,url,19)
+getAllBooksOfCategory(soup,url,33)
