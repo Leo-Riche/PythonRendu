@@ -143,7 +143,7 @@ def getAllBooksOfCategory(soup, url, category_number, category_folder, category_
         None
     """
     try:
-        category_url = url + soup.select("ul > li > a")[category_number]["href"]
+        category_url = url + soup.select("ul > li > ul > li")[category_number]["href"]
         response = requests.get(category_url)
         soup = BeautifulSoup(response.content, 'html.parser')
 
